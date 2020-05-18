@@ -48,9 +48,9 @@ Doodle Jump is a similar example, but I don't plan on using continuous scrolling
 
 ## Teacher Response ##
 
-Approved | Not approved
+**Approved**
 
-Comments and suggestions
+Good game idea for this project.  Please have purposeful levels instead of randomly generated platforms.  I've had students do this kind of game with random platforms and it's not nearly as interesting as designed levels.  Once you have your basic mechanics working, it will be easy to create levels.  You can either go screen by screen or with one or more scrolling sections.  Angled platforms that the player slides off of are pretty easy as long as you keep the angle fixed instead of trying to simulate a physics engine.  For example, if touching a 30 degree platform then you know exactly how much to slide the player by.  Maybe just stick with 30 and 45 degree angle slopes so you can just move the player accordingly.
 
 ## Class Design and Brainstorm ##
 
