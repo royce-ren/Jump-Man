@@ -1,7 +1,14 @@
 import java.util.*;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
 public abstract class World extends Pane {
@@ -12,6 +19,20 @@ public abstract class World extends Pane {
 	private boolean held;
 	private boolean released;
 	private boolean openBottom;
+	
+	protected Player player;
+	protected BorderPane rootNode;
+	
+	final String dungeonPath = getClass().getClassLoader().getResource("images/dungeon.png").toString();
+	protected final BackgroundImage dungeon = new BackgroundImage(new Image(dungeonPath),
+	        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+	          BackgroundSize.DEFAULT);
+	
+	final String slimePath = getClass().getClassLoader().getResource("images/slime.png").toString();
+	protected final BackgroundImage slime = new BackgroundImage(new Image(slimePath),
+	        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+	          BackgroundSize.DEFAULT);
+	
 
 	public World() {
 		aniTimer = new AnimationTimer() {
@@ -26,7 +47,7 @@ public abstract class World extends Pane {
 			}
 		};
 		
-		set = new HashSet<KeyCode>();
+		setSet(new HashSet<KeyCode>());
 		released = false;
 		openBottom = false;
 		time = 0;
@@ -81,6 +102,26 @@ public abstract class World extends Pane {
 		openBottom = isOpenBottom;
 	}
 
+	public Player getPlayer() {
+		return player;
+	}
+	
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+	
+	public BorderPane getRootNode() {
+		return rootNode;
+	}
+	
+	public void setRootNode(BorderPane rootNode) {
+		this.rootNode = rootNode;
+	}
+	
+	public void setCenter() {
+		rootNode.setCenter(this);
+	}
+	
 	public <A extends Actor> List<A> getObjects(java.lang.Class<A> cls) {
 		List<A> temp = new ArrayList<A>();
 		List<Node> children = getChildren();
@@ -92,7 +133,7 @@ public abstract class World extends Pane {
 	}
 	
 	public void addKey(KeyCode k) {
-		set.add(k);
+		getSet().add(k);
 		if(k == KeyCode.SPACE && !held) {
 			prevTime = System.currentTimeMillis();
 			released = false;
@@ -101,17 +142,28 @@ public abstract class World extends Pane {
 	}
 	
 	public void removeKey(KeyCode k) {
-		if(set.contains(k)) set.remove(k);
+		if(getSet().contains(k)) getSet().remove(k);
 		if(k == KeyCode.SPACE) {
 			time = System.currentTimeMillis() - prevTime;
-			System.out.println(time);
 			released = true;
 			held = false;
 		}
 	}
 	
 	public boolean isKeyDown(KeyCode k) {
-		if(set.contains(k)) return true;
+		if(getSet().contains(k)) return true;
 		return false;
+	}
+	
+	public void clearSet() {
+		set.clear();
+	}
+
+	public Set<KeyCode> getSet() {
+		return set;
+	}
+
+	public void setSet(Set<KeyCode> set) {
+		this.set = set;
 	}
 }

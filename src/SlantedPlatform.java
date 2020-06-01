@@ -1,13 +1,27 @@
 import javafx.scene.image.Image;
+import javafx.scene.image.PixelReader;
 
-public class SlantedPlatform extends Platform {
+public class SlantedPlatform extends Actor {
 	
-	public SlantedPlatform(String path) {
-		super(path);
+	private boolean isLeft;
+	
+	public SlantedPlatform(String path, boolean isLeft) {
+		Image img = new Image(path);
+		setImage(img);
+//		super(path);
+		this.setLeft(isLeft);
 	}
 	
 	@Override
 	public void act(long now) {
 		
+	}
+
+	public boolean isLeft() {
+		return isLeft;
+	}
+
+	public void setLeft(boolean isLeft) {
+		this.isLeft = isLeft;
 	}
 }

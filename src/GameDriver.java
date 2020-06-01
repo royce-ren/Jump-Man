@@ -1,12 +1,23 @@
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 public class GameDriver extends Application {
+	
+	private Level1 lev1;
+	private Level2 lev2;
+	private Level3 lev3;
+	private Level4 lev4;
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -18,55 +29,44 @@ public class GameDriver extends Application {
 		primaryStage.setResizable(false);
 		
 		BorderPane rootNode = new BorderPane();
-		
-		Level1 lev1 = new Level1();
-		lev1.setPrefSize(400, 300);
-		
-		rootNode.setCenter(lev1);
-		
 		Scene scene = new Scene(rootNode);
 		
-		Player player = new Player();
-		player.setX(0);
-		player.setY(290);
+//		lev1 = new Level1(rootNode, null);
 		
-		String smallFlat = getClass().getClassLoader().getResource("images/BrickSmallFlat.png").toString();
-		Platform plat2 = new Platform(smallFlat);
-		plat2.setX(250);
-		plat2.setY(250);
+		String path = getClass().getClassLoader().getResource("images/dungeon.png").toString();
+		BackgroundImage myBI= new BackgroundImage(new Image(path),
+		        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+		          BackgroundSize.DEFAULT); //322.0 412.0
 		
-		Platform plat3 = new Platform(smallFlat);
-		plat3.setX(340);
-		plat3.setY(150);
+		rootNode.setBackground(new Background(myBI));
 		
+		lev1 = new Level1(rootNode);
+		lev2 = new Level2(rootNode);
+		lev3 = new Level3(rootNode);
+		lev4 = new Level4(rootNode);
 		
+		lev1.setNextWorld(lev2);
+		lev1.setRootNode(rootNode);
 		
-		lev1.getChildren().addAll(player, plat2, plat3);
+		lev2.setPrevWorld(lev1);
+		lev2.setNextWorld(lev3);
+		lev2.setRootNode(rootNode);
+		lev2.setPlayer(lev1.getPlayer());
 		
-		//stuff here
+		lev3.setPrevWorld(lev2);
+		lev3.setNextWorld(lev4);
+		lev3.setRootNode(rootNode);
+		lev3.setPlayer(lev1.getPlayer());
 		
+		lev4.setPrevWorld(lev3);
+		lev4.setRootNode(rootNode);
+		lev4.setPlayer(lev1.getPlayer());
 		
-		lev1.setOnKeyPressed(new EventHandler<KeyEvent>() {
-			@Override
-			public void handle(KeyEvent event) {
-				if(event.getCode() == KeyCode.SPACE && player.isGrounded()) lev1.addKey(event.getCode());
-				else if(event.getCode() != KeyCode.SPACE) lev1.addKey(event.getCode());
-			}
-		});
-		
-		lev1.setOnKeyReleased(new EventHandler<KeyEvent>() {
-			@Override
-			public void handle(KeyEvent event) {
-				if(event.getCode() == KeyCode.SPACE && player.isGrounded()) lev1.removeKey(event.getCode());
-				else if(event.getCode() != KeyCode.SPACE) lev1.removeKey(event.getCode());
-			}
-		});
 		
 		lev1.start();
 		
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		lev1.requestFocus();
 	}
 	
 }

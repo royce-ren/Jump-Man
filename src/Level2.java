@@ -3,14 +3,26 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
-
-public class Level1 extends World {
+public class Level2 extends World{
 	
-	private Level2 nextWorld;
+	private Level1 prevWorld;
+	private Level3 nextWorld;
 	
 	@Override
 	public void act(long now) {
-		if(player.getY() < 0 && player.getDY() < 0) {
+		if(player.getY() + player.getHeight() > getHeight() && player.getDY() > 0) {
+			double x = player.getX();
+			
+			stop();
+			rootNode.setCenter(prevWorld);
+			prevWorld.getChildren().add(player);
+			this.getChildren().remove(player);
+			prevWorld.clearSet();
+			prevWorld.requestFocus();
+			player.setX(x);
+			player.setY(0);
+			prevWorld.start();
+		} else if(player.getY() < 0 && player.getDY() < 0) {
 			double x = player.getX();
 			
 			stop();
@@ -21,8 +33,8 @@ public class Level1 extends World {
 			nextWorld.requestFocus();
 			nextWorld.start();
 			player.setX(x);
-			player.setY(312); //nextWorld.getHeight() returns zero for some reason
-		} else if(isKeyDown(KeyCode.DIGIT2)) {
+			player.setY(312);
+		} else if(isKeyDown(KeyCode.DIGIT3)) {
 			stop();
 			rootNode.setCenter(nextWorld);
 			nextWorld.getChildren().add(player);
@@ -30,95 +42,61 @@ public class Level1 extends World {
 			nextWorld.clearSet();
 			nextWorld.requestFocus();
 			nextWorld.start();
-			player.setX(60);
+			player.setX(110);
 			player.setY(265);
 		}
 	}
 	
-	public Level1(BorderPane rootNode)  {
+	public Level2(BorderPane rootNode) {
 		this.setPrefSize(400, 300);
-		this.rootNode = rootNode;
-		rootNode.setCenter(this);
+		setOpenBottom(true);
 		
-		player = new Player();
-		player.setX(0);
-		player.setY(0);
-		
-		String brickWall = getClass().getClassLoader().getResource("images/brickWall.png").toString();
-		Platform plat = new Platform(brickWall);
+		String brickWallShort = getClass().getClassLoader().getResource("images/brickWallShort.png").toString();
+		Platform plat = new Platform(brickWallShort);
 		plat.setX(50);
-		plat.setY(-10);
-		
-//		String slab = getClass().getClassLoader().getResource("images/slab.png").toString();
-//		Platform plat2 = new Platform(slab);
-//		plat2.setX(175);
-//		plat2.setY(290);
-		
-		String smallFlat = getClass().getClassLoader().getResource("images/BrickSmallFlat.png").toString();
-		Platform plat3 = new Platform(smallFlat);
-		plat3.setX(260);
-		plat3.setY(270);
-		
-		Platform plat4 = new Platform(smallFlat);
-		plat4.setX(340);
-		plat4.setY(190);
-		
-		Platform plat5 = new Platform(smallFlat);
-		plat5.setX(310);
-		plat5.setY(95);
-		
-		Platform plat6 = new Platform(smallFlat);
-		plat6.setX(160);
-		plat6.setY(65);
-		
-		System.out.println(plat.getWidth());
-		
-		this.getChildren().addAll(player, plat,  plat3, plat4, plat5, plat6);
-		
-		this.setOnKeyPressed(new EventHandler<KeyEvent>() {
-			@Override
-			public void handle(KeyEvent event) {
-				if(event.getCode() == KeyCode.SPACE && player.isGrounded()) addKey(event.getCode());
-				else if(event.getCode() != KeyCode.SPACE) addKey(event.getCode());
-			}
-		});
-		
-		this.setOnKeyReleased(new EventHandler<KeyEvent>() {
-			@Override
-			public void handle(KeyEvent event) {
-				if(event.getCode() == KeyCode.SPACE && player.isGrounded()) removeKey(event.getCode());
-				else if(event.getCode() != KeyCode.SPACE) removeKey(event.getCode());
-			}
-		});
-		
-		requestFocus();
-	}
-	
-	public Level1(BorderPane rootNode, Level2 nextWorld) {
-		this.nextWorld = nextWorld;
-		this.setPrefSize(400, 300);
-		
-		rootNode.setCenter(this);
-		
-		player = new Player();
-		player.setX(0);
-		player.setY(290);
+		plat.setY(290);
 		
 		String smallFlat = getClass().getClassLoader().getResource("images/BrickSmallFlat.png").toString();
 		Platform plat2 = new Platform(smallFlat);
-		plat2.setX(250);
-		plat2.setY(250);
+		plat2.setX(270);
+		plat2.setY(280);
 		
 		Platform plat3 = new Platform(smallFlat);
-		plat3.setX(340);
-		plat3.setY(150);
+		plat3.setX(350);
+		plat3.setY(220);
 		
+		Platform plat4 = new Platform(smallFlat);
+		plat4.setX(300);
+		plat4.setY(160);
 		
+		String brickShort = getClass().getClassLoader().getResource("images/brickShort2.png").toString();
+		Platform plat5 = new Platform(brickShort);
+		plat5.setX(230);
+		plat5.setY(-60);
 		
-		this.getChildren().addAll(player, plat2, plat3);
+		Platform plat6 = new Platform(smallFlat);
+		plat6.setX(200);
+		plat6.setY(150);
 		
-		//stuff here
+		String brickTiny = getClass().getClassLoader().getResource("images/brickTiny.png").toString();
+		Platform plat7 = new Platform(brickTiny);
+		plat7.setX(185);
+		plat7.setY(290);
 		
+		Platform plat8 = new Platform(brickTiny);
+		plat8.setX(-10);
+		plat8.setY(140);
+		
+		Platform plat9 = new Platform(brickTiny);
+		plat9.setX(200);
+		plat9.setY(60);
+		
+		String brickSlantRight = getClass().getClassLoader().getResource("images/brickSlantRight.png").toString();
+		SlantedPlatform plat10 = new SlantedPlatform(brickSlantRight, false);
+		plat10.setX(20);
+		plat10.setY(141);
+		
+		this.getChildren().addAll(plat, plat2, plat3, plat4, plat5, plat6, plat7, plat8, plat9, plat10);
 		
 		this.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
@@ -135,12 +113,37 @@ public class Level1 extends World {
 				else if(event.getCode() != KeyCode.SPACE) removeKey(event.getCode());
 			}
 		});
-		
-		requestFocus();
 	}
 	
-	public void setNextWorld(Level2 lev2) {
-		nextWorld = lev2;
+	public Level2(BorderPane rootNode, Level1 lev1/*, Level3 lev3*/) {
+		this.setPrefSize(400, 300);
+		player = lev1.getPlayer();
+		
+		setOpenBottom(true);
+		
+		this.setOnKeyPressed(new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent event) {
+				if(event.getCode() == KeyCode.SPACE && player.isGrounded()) addKey(event.getCode());
+				else if(event.getCode() != KeyCode.SPACE) addKey(event.getCode());
+			}
+		});
+		
+		this.setOnKeyReleased(new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent event) {
+				if(event.getCode() == KeyCode.SPACE && player.isGrounded()) removeKey(event.getCode());
+				else if(event.getCode() != KeyCode.SPACE) removeKey(event.getCode());
+			}
+		});
+	}
+	
+	public void setPrevWorld(Level1 lev1) {
+		prevWorld = lev1;
+	}
+	
+	public void setNextWorld(Level3 lev3) {
+		nextWorld = lev3;
 	}
 	
 }
