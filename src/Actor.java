@@ -53,6 +53,7 @@ public class Actor extends ImageView {
 	
 	public <A extends Actor> boolean pixelPerfectColl(java.lang.Class<A> cls) {
 		A actor = getOneIntersectingObject(cls);
+//		System.out.println("hey " + actor != null);
 //		if(actor != null) {
 //			for(int i = (int) actor.getX(); i <= actor.getX() + actor.getWidth(); i++) {
 //				for(int j = (int) actor.getY(); j <= actor.getY() + actor.getHeight(); j++) {

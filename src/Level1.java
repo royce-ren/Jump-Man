@@ -57,7 +57,7 @@ public class Level1 extends World {
 		String smallFlat = getClass().getClassLoader().getResource("images/BrickSmallFlat.png").toString();
 		Platform plat3 = new Platform(smallFlat);
 		plat3.setX(260);
-		plat3.setY(270);
+		plat3.setY(280);
 		
 		Platform plat4 = new Platform(smallFlat);
 		plat4.setX(340);

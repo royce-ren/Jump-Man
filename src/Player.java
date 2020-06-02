@@ -94,6 +94,8 @@ public class Player extends Actor {
 					dx = -3 - time * 0.001; // set respective x speeds if held arrow keys
 				else if (getWorld().isKeyDown(KeyCode.RIGHT))
 					dx = 3 + time * 0.001;
+				
+				dx = Math.max(Math.min(dx, 9), -9);
 
 				dy = -2 + -1 * time * 0.015; // scale y velocity proportionally to time held, 2
 
@@ -115,7 +117,7 @@ public class Player extends Actor {
 
 		// if we're touching a platform and we're not grounded, then execute task
 		// platform interactions
-		if (platform != null && !isGrounded) {
+		if (platform != null && !platform.isInvisible && !isGrounded) {
 			double xCenter = getX() + getWidth() / 2;
 			double yCenter = getY() + getHeight() / 2;
 
@@ -180,8 +182,7 @@ public class Player extends Actor {
 		// if we are touching a platform and we're on top of it, we're grounded
 		if (getY() >= getWorld().getHeight() - getHeight() && !getWorld().isOpenBottom())
 			isGrounded = true;
-		else if (platform != null) {
-			System.out.println((getY() + getHeight() >= platform.getY()) + " " + (getY() + getHeight() < platform.getY() + platform.getHeight() / 2));
+		else if (platform != null  && !platform.isInvisible) {
 			if (getX() + getWidth() > platform.getX() && getX() < platform.getX() + platform.getWidth()) {
 				if (getY() + getHeight() >= platform.getY()
 						&& getY() + getHeight() < platform.getY() + platform.getHeight() / 2) { // caution! bug was found here
@@ -351,7 +352,7 @@ public class Player extends Actor {
 		// System.out.println("x: " + getX() + " " + "y: " + getY() + " prevX: " + prevX
 		// + " prevY: " + prevY);
 		// System.out.println(getX() == prevX);
-		System.out.println(isGrounded);
+//		System.out.println(isGrounded);
 
 		// good bound checking
 		setX(Math.min(Math.max(getX(), 0), getWorld().getWidth() - 22)); // idk why, but the world is not the correct x

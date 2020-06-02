@@ -44,8 +44,8 @@ public class Level3 extends World {
 			nextWorld.clearSet();
 			nextWorld.requestFocus();
 			nextWorld.start();
-			player.setX(130); 
-			player.setY(260);
+			player.setX(130);
+			player.setY(260); 
 		}
 	}
 	

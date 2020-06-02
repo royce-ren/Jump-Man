@@ -18,6 +18,8 @@ public class GameDriver extends Application {
 	private Level2 lev2;
 	private Level3 lev3;
 	private Level4 lev4;
+	private Level5 lev5;
+	private Level6 lev6;
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -44,6 +46,8 @@ public class GameDriver extends Application {
 		lev2 = new Level2(rootNode);
 		lev3 = new Level3(rootNode);
 		lev4 = new Level4(rootNode);
+		lev5 = new Level5(rootNode);
+		lev6 = new Level6(rootNode);
 		
 		lev1.setNextWorld(lev2);
 		lev1.setRootNode(rootNode);
@@ -59,9 +63,18 @@ public class GameDriver extends Application {
 		lev3.setPlayer(lev1.getPlayer());
 		
 		lev4.setPrevWorld(lev3);
+		lev4.setNextWorld(lev5);
 		lev4.setRootNode(rootNode);
 		lev4.setPlayer(lev1.getPlayer());
 		
+		lev5.setPrevWorld(lev4);
+		lev5.setNextWorld(lev6);
+		lev5.setRootNode(rootNode);
+		lev5.setPlayer(lev1.getPlayer());
+		
+		lev6.setPrevWorld(lev5);
+		lev6.setRootNode(rootNode);
+		lev6.setPlayer(lev1.getPlayer());
 		
 		lev1.start();
 		
