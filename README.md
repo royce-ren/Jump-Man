@@ -60,17 +60,74 @@ Put all your brainstorm ideas, strategy approaches, and class outlines here
 
 Every day you work, keep track of it here.
 
-**Date (time spent)**
+**5/24 (1 hour)**
 
-Goal:  What are you trying to accomplish today?
+Goal: Pre-planning, figure out what classes and things I need
 
-Work accomplished:  Describe what you did today and how it went.
+Work accomplished:  Drew a diagram and basic functions, hopefully works ahead.
 
-**Date (time spent)**
+**5/25 (2 hour)**
 
-Goal:  What are you trying to accomplish today?
+Goal:  Code in the main framework, proof of concept of my framework.
 
-Work accomplished:  Describe what you did today and how it went.
+Work accomplished:  Most major classes are in and coded, auxiliary methods coded as well.
+
+**5/26 (2 hour)**
+
+Goal:  Code Player class and add basic physics.
+
+Work accomplished: Jumping physics and collisions done.
+
+**5/27 (2 hour)**
+
+Goal:  Code Platform class and barebones first level, as well as outofbounds checks.
+
+Work accomplished: Very barebones somewhat works, collisions and outofbounds buggy.
+
+**5/28 (2 hour)**
+
+Goal: Debug physics and collisions
+
+Work accomplished:  Most bugs fixed, very minor ones remain
+
+**5/29 (2 hour)**
+
+Goal: Search for art and create backgrounds/sprites
+
+Work accomplished:  Art is found and in!
+
+**5/29 (2 hour)**
+
+Goal: Create SlantedPLatform and level 1 complete
+
+Work accomplished: SlantedPlatform more or less works, level1 finalized.
+
+**5/30 (3 hour)**
+
+Goal: Create Levels 2 and 3, adding art and such as needed
+
+Work accomplished:  Created my own Frankensteined art, levels 2 and 3 done
+
+**5/31 (3 hour)**
+
+Goal: Find new art theme and create newer levels, plus FlippingPlatform
+
+Work accomplished:  FlippingPlatform works amazingly, and level 4 and 5 are done.
+
+**6/1 (3 hour)**
+
+Goal: Find new art theme, continue working on more levels
+Work accomplished: Art takes long. New art sourced, more level design, level 6 and 7 done.
+
+**6/2 (3 hour)**
+
+Goal: Create new Platform class, MovingPlatform, and create more levels. Debug some collision errors
+Work accomplished: Bug persists. MovingPlatform works well, level 8 and 9 done.
+
+**6/3 (3 hour)**
+
+Goal: Finish!
+Work accomplished: Final level 10 done. End screen art found and completed, scene switching good.
 
 ***
 ***
