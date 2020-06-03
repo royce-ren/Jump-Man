@@ -22,7 +22,6 @@ public class FlippingPlatform extends Platform {
 		if(!isInvisible) {
 			setImage(new Image(path));
 			if(counter / (60 * lenAppear) >= 1) {
-				System.out.println("hey, listen!");
 				counter = 0;
 				isInvisible = true;
 			}

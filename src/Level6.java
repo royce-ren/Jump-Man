@@ -7,7 +7,7 @@ import javafx.scene.layout.BorderPane;
 public class Level6 extends World {
 	
 	private Level5 prevWorld;
-//	private Level7 nextWorld;
+	private Level7 nextWorld;
 	
 	@Override
 	public void act(long now) {
@@ -15,6 +15,7 @@ public class Level6 extends World {
 			double x = player.getX();
 			
 			stop();
+			rootNode.setBackground(new Background(slime));
 			rootNode.setCenter(prevWorld);
 			prevWorld.getChildren().add(player);
 			this.getChildren().remove(player);
@@ -23,6 +24,31 @@ public class Level6 extends World {
 			player.setX(x);
 			player.setY(0);
 			prevWorld.start();
+		} else if(player.getY() < 0 && player.getDY() < 0) {
+			double x = player.getX();
+			
+			stop();
+			rootNode.setBackground(new Background(dirt));
+			rootNode.setCenter(nextWorld);
+			nextWorld.getChildren().add(player);
+			this.getChildren().remove(player);
+			nextWorld.clearSet();
+			nextWorld.requestFocus();
+			nextWorld.start();
+			player.setX(x);
+			player.setY(312);
+		} else if(isKeyDown(KeyCode.DIGIT7)) {
+			stop();
+			rootNode.setBackground(new Background(dirt));
+			rootNode.setCenter(nextWorld);
+			nextWorld.getChildren().add(player);
+			this.getChildren().remove(player);
+			nextWorld.clearSet();
+			nextWorld.requestFocus();
+			nextWorld.start();
+			player.setX(0);
+			player.setY(255);
+			player.clearDYDX();
 		}
 	}
 	
@@ -96,7 +122,7 @@ public class Level6 extends World {
 		prevWorld = lev5;
 	}
 	
-//	public void setNextWorld(Level7 lev7) {
-//		nextWorld = lev7;
-//	}
+	public void setNextWorld(Level7 lev7) {
+		nextWorld = lev7;
+	}
 }

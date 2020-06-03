@@ -20,6 +20,10 @@ public class GameDriver extends Application {
 	private Level4 lev4;
 	private Level5 lev5;
 	private Level6 lev6;
+	private Level7 lev7;
+	private Level8 lev8;
+	private Level9 lev9;
+	private Level10 lev10;
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -32,8 +36,6 @@ public class GameDriver extends Application {
 		
 		BorderPane rootNode = new BorderPane();
 		Scene scene = new Scene(rootNode);
-		
-//		lev1 = new Level1(rootNode, null);
 		
 		String path = getClass().getClassLoader().getResource("images/dungeon.png").toString();
 		BackgroundImage myBI= new BackgroundImage(new Image(path),
@@ -48,6 +50,10 @@ public class GameDriver extends Application {
 		lev4 = new Level4(rootNode);
 		lev5 = new Level5(rootNode);
 		lev6 = new Level6(rootNode);
+		lev7 = new Level7(rootNode);
+		lev8 = new Level8(rootNode);
+		lev9 = new Level9();
+		lev10 = new Level10();
 		
 		lev1.setNextWorld(lev2);
 		lev1.setRootNode(rootNode);
@@ -73,8 +79,28 @@ public class GameDriver extends Application {
 		lev5.setPlayer(lev1.getPlayer());
 		
 		lev6.setPrevWorld(lev5);
+		lev6.setNextWorld(lev7);
 		lev6.setRootNode(rootNode);
 		lev6.setPlayer(lev1.getPlayer());
+		
+		lev7.setPrevWorld(lev6);
+		lev7.setNextWorld(lev8);
+		lev7.setRootNode(rootNode);
+		lev7.setPlayer(lev1.getPlayer());
+		
+		lev8.setPrevWorld(lev7);
+		lev8.setNextWorld(lev9);
+		lev8.setRootNode(rootNode);
+		lev8.setPlayer(lev1.getPlayer());
+		
+		lev9.setPrevWorld(lev8);
+		lev9.setNextWorld(lev10);
+		lev9.setRootNode(rootNode);
+		lev9.setPlayer(lev1.getPlayer());
+		
+		lev10.setPrevWorld(lev9);
+		lev10.setRootNode(rootNode);
+		lev10.setPlayer(lev1.getPlayer());
 		
 		lev1.start();
 		

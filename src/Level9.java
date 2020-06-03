@@ -4,10 +4,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 
-public class Level5 extends World {
-	
-	private Level4 prevWorld;
-	private Level6 nextWorld;
+public class Level9 extends World {
+
+	private Level8 prevWorld;
+	private Level10 nextWorld;
 	
 	@Override
 	public void act(long now) {
@@ -27,6 +27,7 @@ public class Level5 extends World {
 			double x = player.getX();
 			
 			stop();
+			rootNode.setBackground(new Background(end));
 			rootNode.setCenter(nextWorld);
 			nextWorld.getChildren().add(player);
 			this.getChildren().remove(player);
@@ -35,60 +36,49 @@ public class Level5 extends World {
 			nextWorld.start();
 			player.setX(x);
 			player.setY(312);
-		} else if(isKeyDown(KeyCode.DIGIT6)) {
+		} else if(isKeyDown(KeyCode.DIGIT0)) {
 			stop();
+			rootNode.setBackground(new Background(end));
 			rootNode.setCenter(nextWorld);
 			nextWorld.getChildren().add(player);
 			this.getChildren().remove(player);
 			nextWorld.clearSet();
 			nextWorld.requestFocus();
 			nextWorld.start();
-			player.setX(130);
-			player.setY(250); 
+			player.setX(320);
+			player.setY(265); 
 			player.clearDYDX();
 		}
 	}
 	
-	public Level5(BorderPane rootNode) {
+	public Level9() {
 		this.setPrefSize(400, 300);
 		setOpenBottom(true);
 		
-		String smallFlat = getClass().getClassLoader().getResource("images/slimeSmallFlat.png").toString();
+		String smallFlat = getClass().getClassLoader().getResource("images/dirtSmallFlat.png").toString();
 		Platform plat = new Platform(smallFlat);
-		plat.setX(-20);
-		plat.setY(275);
+		plat.setX(100);
+		plat.setY(280);
 		
 		String invis = getClass().getClassLoader().getResource("images/slimeBlank.png").toString();
-		FlippingPlatform plat2 = new FlippingPlatform(smallFlat, invis, 2, 2);
-		plat2.setX(0);
-		plat2.setY(180);
+		FlippingMovingPlatform plat2 = new FlippingMovingPlatform(smallFlat, invis, 4, 4, 160, 270, 270, 230, 4);
 		
-		Platform plat3 = new Platform(smallFlat);
-		plat3.setX(280);
-		plat3.setY(220);
+		String dot = getClass().getClassLoader().getResource("images/dirtDot.png").toString();
+		Platform plat3 = new Platform(dot);
+		plat3.setX(360);
+		plat3.setY(180);
 		
-		String slimeDot = getClass().getClassLoader().getResource("images/slimeDot.png").toString();
-		Platform plat4 = new Platform(slimeDot);
-		plat4.setX(375);
-		plat4.setY(220);
+		FlippingPlatform plat4 = new FlippingPlatform(smallFlat, invis, 3, 1.5);
+		plat4.setX(240);
+		plat4.setY(160);
 		
-		FlippingPlatform plat5 = new FlippingPlatform(smallFlat, invis, 2, 1.5);
-		plat5.setX(310);
-		plat5.setY(170);
+		FlippingMovingPlatform plat5 = new FlippingMovingPlatform(smallFlat, invis, 3.5, 3.5, 140, 20, 160, 100, 3.5);
 		
-		Platform plat6 = new Platform(smallFlat);
+		Platform plat6 = new Platform(dot);
 		plat6.setX(250);
-		plat6.setY(110);
+		plat6.setY(65);
 		
-		FlippingPlatform plat7 = new FlippingPlatform(slimeDot, invis, 3, 1);
-		plat7.setX(350);
-		plat7.setY(70);
-		
-		Platform plat8 = new Platform(smallFlat);
-		plat8.setX(235);
-		plat8.setY(30);
-		
-		this.getChildren().addAll(plat, plat2, plat3, plat4, plat5, plat6, plat7, plat8);
+		this.getChildren().addAll(plat, plat2, plat3, plat4, plat5, plat6);
 		
 		this.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
@@ -107,11 +97,11 @@ public class Level5 extends World {
 		});
 	}
 	
-	public void setPrevWorld(Level4 lev4) {
-		prevWorld = lev4;
+	public void setPrevWorld(Level8 lev8) {
+		prevWorld = lev8;
 	}
 	
-	public void setNextWorld(Level6 lev6) {
-		nextWorld = lev6;
+	public void setNextWorld(Level10 lev10) {
+		nextWorld = lev10;
 	}
 }

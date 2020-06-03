@@ -372,4 +372,17 @@ public class Player extends Actor {
 	public double getDY() {
 		return dy;
 	}
+	
+	public void setDX(double dx) {
+		this.dx = dx;
+	}
+
+	public void setDY(double dy) {
+		this.dy = dy;
+	}
+	
+	public void clearDYDX() {
+		dx = 0;
+		dy = 0;
+	}
 }

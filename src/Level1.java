@@ -32,6 +32,7 @@ public class Level1 extends World {
 			nextWorld.start();
 			player.setX(60);
 			player.setY(265);
+			player.clearDYDX();
 		}
 	}
 	
@@ -70,8 +71,6 @@ public class Level1 extends World {
 		Platform plat6 = new Platform(smallFlat);
 		plat6.setX(160);
 		plat6.setY(65);
-		
-		System.out.println(plat.getWidth());
 		
 		this.getChildren().addAll(player, plat,  plat3, plat4, plat5, plat6);
 		

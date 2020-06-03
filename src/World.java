@@ -33,6 +33,17 @@ public abstract class World extends Pane {
 	        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
 	          BackgroundSize.DEFAULT);
 	
+	final String dirtPath = getClass().getClassLoader().getResource("images/dirt.png").toString();
+	protected final BackgroundImage dirt = new BackgroundImage(new Image(dirtPath),
+	        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+	          BackgroundSize.DEFAULT);
+	
+	final String endPath = getClass().getClassLoader().getResource("images/end.png").toString();
+	protected final BackgroundImage end = new BackgroundImage(new Image(endPath),
+	        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+	          BackgroundSize.DEFAULT); 
+	
+	
 
 	public World() {
 		aniTimer = new AnimationTimer() {

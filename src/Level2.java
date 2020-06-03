@@ -44,6 +44,7 @@ public class Level2 extends World{
 			nextWorld.start();
 			player.setX(110);
 			player.setY(265);
+			player.clearDYDX();
 		}
 	}
 	
